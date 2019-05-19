@@ -1,6 +1,8 @@
 #include "helix.h"
 #include "helix.h"
 #include <iostream>
+#include <math.h>
+
 
 using namespace std;
 
@@ -25,6 +27,10 @@ Helix::Helix(long size)
     m_helixILT = new long *[size];
     for (long i = 0; i < size; i++) m_helixILT[i] = new long [size];
 
+    m_field = new char *[size];
+    for (long i = 0; i < size; i++) m_field[i] = new char [size];
+    clearField();
+
     fillHITL();
     fillHIRT();
     fillHIBR();
@@ -37,33 +43,61 @@ Helix::Helix(long size)
 
 Helix::~Helix()
 {
-    for (int i = 0; i < m_size; i++) delete[]m_helixITL[i];
+    for (long i = 0; i < m_size; i++) delete[]m_helixITL[i];
     delete[]m_helixITL;
-    for (int i = 0; i < m_size; i++) delete[]m_helixIRT[i];
+    for (long i = 0; i < m_size; i++) delete[]m_helixIRT[i];
     delete[]m_helixIRT;
-    for (int i = 0; i < m_size; i++) delete[]m_helixIBR[i];
+    for (long i = 0; i < m_size; i++) delete[]m_helixIBR[i];
     delete[]m_helixIBR;
-    for (int i = 0; i < m_size; i++) delete[]m_helixILB[i];
+    for (long i = 0; i < m_size; i++) delete[]m_helixILB[i];
     delete[]m_helixILB;
-    for (int i = 0; i < m_size; i++) delete[]m_helixITR[i];
+    for (long i = 0; i < m_size; i++) delete[]m_helixITR[i];
     delete[]m_helixITR;
-    for (int i = 0; i < m_size; i++) delete[]m_helixIRB[i];
+    for (long i = 0; i < m_size; i++) delete[]m_helixIRB[i];
     delete[]m_helixIRB;
-    for (int i = 0; i < m_size; i++) delete[]m_helixIBL[i];
+    for (long i = 0; i < m_size; i++) delete[]m_helixIBL[i];
     delete[]m_helixIBL;
-    for (int i = 0; i < m_size; i++) delete[]m_helixILT[i];
+    for (long i = 0; i < m_size; i++) delete[]m_helixILT[i];
     delete[]m_helixILT;
+    for (long i = 0; i < m_size; i++) delete[]m_field[i];
+    delete[]m_field;
 }
 
-void Helix::printMatrix(long **m)
+void Helix::printField()
+{
+    std::system("clear");
+    for(int i = 0; i < m_size; i++)
+    {
+        for(int j = 0; j < m_size; j++)
+        {
+            cout << m_field[i][j];
+        }
+        cout << endl;
+    }
+    cout << endl << endl;
+}
+
+void Helix::clearField()
 {
     for(int i = 0; i < m_size; i++)
     {
         for(int j = 0; j < m_size; j++)
-            cout << m[i][j] << "\t";
-        cout << endl << endl;
+        {
+            m_field[i][j] = '.';
+        }
     }
-    cout << endl << endl;
+}
+
+void Helix::fillField(long **m)
+{
+    for(int i = 0; i < m_size; i++)
+    {
+        for(int j = 0; j < m_size; j++)
+        {
+            if (isPrime(m[i][j]))
+                m_field[i][j] = '#';
+        }
+    }
 }
 
 void Helix::fillHITL()
@@ -232,6 +266,18 @@ void Helix::fillHILT()
         colEnd++; cout << '|';
     }
     cout << endl;
+}
+
+bool Helix::isPrime(long n)
+{
+    for (long i = 2; i<sqrt(n); i++)
+    {
+        if (n % i == 0)
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 void Helix::fillHITR()
