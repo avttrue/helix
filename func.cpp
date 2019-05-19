@@ -18,8 +18,8 @@ void clearScreen()
 
 bool isPrimitive(long n)
 {
-    for (long i = 2; i<sqrt(n); i++)
-        if (n % i == 0) return false;
+    for(long i = 2; i<sqrt(n); i++)
+        if(n % i == 0) return false;
     return true;
 }
 

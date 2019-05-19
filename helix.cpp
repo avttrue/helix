@@ -10,55 +10,55 @@ Helix::Helix(long size)
     m_size = size;
     auto s = static_cast<unsigned long>(size);
 
-    m_helixITL = new long *[s];
-    for (long i = 0; i < size; i++) m_helixITL[i] = new long [s];
-    m_helixIRT = new long *[s];
-    for (long i = 0; i < size; i++) m_helixIRT[i] = new long [s];
-    m_helixIBR = new long *[s];
-    for (long i = 0; i < size; i++) m_helixIBR[i] = new long [s];
-    m_helixILB = new long *[s];
-    for (long i = 0; i < size; i++) m_helixILB[i] = new long [s];
-    m_helixITR = new long *[s];
-    for (long i = 0; i < size; i++) m_helixITR[i] = new long [s];
-    m_helixIRB = new long *[s];
-    for (long i = 0; i < size; i++) m_helixIRB[i] = new long [s];
-    m_helixIBL = new long *[s];
-    for (long i = 0; i < size; i++) m_helixIBL[i] = new long [s];
-    m_helixILT = new long *[s];
-    for (long i = 0; i < size; i++) m_helixILT[i] = new long [s];
+    m_helixTL = new long *[s];
+    for (long i = 0; i < size; i++) m_helixTL[i] = new long [s];
+    m_helixRT = new long *[s];
+    for (long i = 0; i < size; i++) m_helixRT[i] = new long [s];
+    m_helixBR = new long *[s];
+    for (long i = 0; i < size; i++) m_helixBR[i] = new long [s];
+    m_helixLB = new long *[s];
+    for (long i = 0; i < size; i++) m_helixLB[i] = new long [s];
+    m_helixTR = new long *[s];
+    for (long i = 0; i < size; i++) m_helixTR[i] = new long [s];
+    m_helixRB = new long *[s];
+    for (long i = 0; i < size; i++) m_helixRB[i] = new long [s];
+    m_helixBL = new long *[s];
+    for (long i = 0; i < size; i++) m_helixBL[i] = new long [s];
+    m_helixLT = new long *[s];
+    for (long i = 0; i < size; i++) m_helixLT[i] = new long [s];
 
     m_field = new char *[s];
     for (long i = 0; i < size; i++) m_field[i] = new char [s];
     clearField();
 
-    fillHITL();
-    fillHIRT();
-    fillHIBR();
-    fillHILB();
-    fillHITR();
-    fillHIRB();
-    fillHIBL();
-    fillHILT();
+    fillHTL();
+    fillHRT();
+    fillHBR();
+    fillHLB();
+    fillHTR();
+    fillHRB();
+    fillHBL();
+    fillHLT();
 }
 
 Helix::~Helix()
 {
-    for (long i = 0; i < m_size; i++) delete[]m_helixITL[i];
-    delete[]m_helixITL;
-    for (long i = 0; i < m_size; i++) delete[]m_helixIRT[i];
-    delete[]m_helixIRT;
-    for (long i = 0; i < m_size; i++) delete[]m_helixIBR[i];
-    delete[]m_helixIBR;
-    for (long i = 0; i < m_size; i++) delete[]m_helixILB[i];
-    delete[]m_helixILB;
-    for (long i = 0; i < m_size; i++) delete[]m_helixITR[i];
-    delete[]m_helixITR;
-    for (long i = 0; i < m_size; i++) delete[]m_helixIRB[i];
-    delete[]m_helixIRB;
-    for (long i = 0; i < m_size; i++) delete[]m_helixIBL[i];
-    delete[]m_helixIBL;
-    for (long i = 0; i < m_size; i++) delete[]m_helixILT[i];
-    delete[]m_helixILT;
+    for (long i = 0; i < m_size; i++) delete[]m_helixTL[i];
+    delete[]m_helixTL;
+    for (long i = 0; i < m_size; i++) delete[]m_helixRT[i];
+    delete[]m_helixRT;
+    for (long i = 0; i < m_size; i++) delete[]m_helixBR[i];
+    delete[]m_helixBR;
+    for (long i = 0; i < m_size; i++) delete[]m_helixLB[i];
+    delete[]m_helixLB;
+    for (long i = 0; i < m_size; i++) delete[]m_helixTR[i];
+    delete[]m_helixTR;
+    for (long i = 0; i < m_size; i++) delete[]m_helixRB[i];
+    delete[]m_helixRB;
+    for (long i = 0; i < m_size; i++) delete[]m_helixBL[i];
+    delete[]m_helixBL;
+    for (long i = 0; i < m_size; i++) delete[]m_helixLT[i];
+    delete[]m_helixLT;
     for (long i = 0; i < m_size; i++) delete[]m_field[i];
     delete[]m_field;
 }
@@ -68,225 +68,212 @@ void Helix::printField()
     clearScreen();
     for(int i = 0; i < m_size; i++)
     {
-        for(int j = 0; j < m_size; j++)
-        {
-            cout << m_field[i][j];
-        }
+        for(int j = 0; j < m_size; j++) cout << m_field[i][j];
         cout << endl;
     }
-    cout << endl << endl;
+    cout  << endl;
 }
 
 void Helix::clearField()
 {
     for(int i = 0; i < m_size; i++)
-    {
-        for(int j = 0; j < m_size; j++)
-        {
-            m_field[i][j] = '-';
-        }
-    }
+        for(int j = 0; j < m_size; j++) m_field[i][j] = '-';
 }
 
 void Helix::fillField(long **m)
 {
     for(int i = 0; i < m_size; i++)
-    {
         for(int j = 0; j < m_size; j++)
-        {
-            if (isPrimitive(m[i][j]))
-                m_field[i][j] = '#';
-        }
-    }
+            if (isPrimitive(m[i][j])) m_field[i][j] = '#';
 }
 
-void Helix::fillHITL()
+void Helix::fillHTL()
 {
     long rowBeg = 0, colBeg = 0;
     long rowEnd = m_size - 1, colEnd = m_size - 1;
     long value = m_size * m_size;
-    cout << "HITL: ";
+    cout << "TL: ";
     while(value)
     {
         for(long i = rowBeg; i <= rowEnd && value; i++)
-            m_helixITL[i][colEnd] = value--;
+            m_helixTL[i][colEnd] = value--;
         colEnd--; cout << '|';
         for(long i = colEnd; i >= colBeg && value; i--)
-            m_helixITL[rowEnd][i] = value--;
+            m_helixTL[rowEnd][i] = value--;
         rowEnd--; cout << '-';
         for(long i = rowEnd; i >= rowBeg && value; i--)
-            m_helixITL[i][colBeg] = value--;
+            m_helixTL[i][colBeg] = value--;
         colBeg++; cout << '|';
         for(long i = colBeg; i <= colEnd && value; i++)
-            m_helixITL[rowBeg][i] = value--;
+            m_helixTL[rowBeg][i] = value--;
         rowBeg++; cout << '-';
     }
     cout << endl;
 }
 
-void Helix::fillHIRT()
+void Helix::fillHRT()
 {
     long rowBeg = 0, colBeg = 0;
     long rowEnd = m_size - 1, colEnd = m_size - 1;
     long value = m_size * m_size;
-    cout << "HIRT: ";
+    cout << "RT: ";
     while(value)
     {
         for(long i = colEnd; i >= colBeg && value; i--)
-            m_helixIRT[rowEnd][i] = value--;
+            m_helixRT[rowEnd][i] = value--;
         rowEnd--; cout << '-';
         for(long i = rowEnd; i >= rowBeg && value; i--)
-            m_helixIRT[i][colBeg] = value--;
+            m_helixRT[i][colBeg] = value--;
         colBeg++; cout << '|';
         for(long i = colBeg; i <= colEnd && value; i++)
-            m_helixIRT[rowBeg][i] = value--;
+            m_helixRT[rowBeg][i] = value--;
         rowBeg++; cout << '-';
         for(long i = rowBeg; i <= rowEnd && value; i++)
-            m_helixIRT[i][colEnd] = value--;
+            m_helixRT[i][colEnd] = value--;
         colEnd--; cout << '|';
     }
     cout << endl;
 }
 
-void Helix::fillHIBR()
+void Helix::fillHBR()
 {
     long rowBeg = 0, colBeg = 0;
     long rowEnd = m_size - 1, colEnd = m_size - 1;
     long value = m_size * m_size;
-    cout << "HIBR: ";
+    cout << "BR: ";
     while(value)
     {
         for(long i = rowEnd; i >= rowBeg && value; i--)
-            m_helixIBR[i][colBeg] = value--;
+            m_helixBR[i][colBeg] = value--;
         colBeg++; cout << '|';
         for(long i = colBeg; i <= colEnd && value; i++)
-            m_helixIBR[rowBeg][i] = value--;
+            m_helixBR[rowBeg][i] = value--;
         rowBeg++; cout << '-';
         for(long i = rowBeg; i <= rowEnd && value; i++)
-            m_helixIBR[i][colEnd] = value--;
+            m_helixBR[i][colEnd] = value--;
         colEnd--; cout << '|';
         for(long i = colEnd; i >= colBeg && value; i--)
-            m_helixIBR[rowEnd][i] = value--;
+            m_helixBR[rowEnd][i] = value--;
         rowEnd--; cout << '-';
     }
     cout << endl;
 }
 
-void Helix::fillHILB()
+void Helix::fillHLB()
 {
     long rowBeg = 0, colBeg = 0;
     long rowEnd = m_size - 1, colEnd = m_size - 1;
     long value = m_size * m_size;
-    cout << "HILB: ";
+    cout << "LB: ";
     while(value)
     {
         for(long i = colBeg; i <= colEnd && value; i++)
-            m_helixILB[rowBeg][i] = value--;
+            m_helixLB[rowBeg][i] = value--;
         rowBeg++; cout << '-';
         for(long i = rowBeg; i <= rowEnd && value; i++)
-            m_helixILB[i][colEnd] = value--;
+            m_helixLB[i][colEnd] = value--;
         colEnd--; cout << '|';
         for(long i = colEnd; i >= colBeg && value; i--)
-            m_helixILB[rowEnd][i] = value--;
+            m_helixLB[rowEnd][i] = value--;
         rowEnd--; cout << '-';
         for(long i = rowEnd; i >= rowBeg && value; i--)
-            m_helixILB[i][colBeg] = value--;
+            m_helixLB[i][colBeg] = value--;
         colBeg++; cout << '|';
     }
     cout << endl;
 }
 
-void Helix::fillHIRB()
+void Helix::fillHRB()
 {
     long rowBeg = 0, colEnd = 0;
     long rowEnd = m_size - 1, colBeg = m_size - 1;
     long value = m_size * m_size;
-    cout << "HIRB: ";
+    cout << "RB: ";
     while(value)
     {
         for(long i = colBeg; i >= colEnd && value; i--)
-            m_helixIRB[rowBeg][i] = value--;
+            m_helixRB[rowBeg][i] = value--;
         rowBeg++; cout << '-';
         for(long i = rowBeg; i <= rowEnd && value; i++)
-            m_helixIRB[i][colEnd] = value--;
+            m_helixRB[i][colEnd] = value--;
         colEnd++; cout << '|';
         for(long i = colEnd; i <= colBeg && value; i++)
-            m_helixIRB[rowEnd][i] = value--;
+            m_helixRB[rowEnd][i] = value--;
         rowEnd--; cout << '-';
         for(long i = rowEnd; i >= rowBeg && value; i--)
-            m_helixIRB[i][colBeg] = value--;
+            m_helixRB[i][colBeg] = value--;
         colBeg--; cout << '|';
     }
     cout << endl;
 }
 
-void Helix::fillHIBL()
+void Helix::fillHBL()
 {
     long rowBeg = 0, colEnd = 0;
     long rowEnd = m_size - 1, colBeg = m_size - 1;
     long value = m_size * m_size;
-    cout << "HIBL: ";
+    cout << "BL: ";
     while(value)
     {
         for(long i = rowEnd; i >= rowBeg && value; i--)
-            m_helixIBL[i][colBeg] = value--;
+            m_helixBL[i][colBeg] = value--;
         colBeg--; cout << '|';
         for(long i = colBeg; i >= colEnd && value; i--)
-            m_helixIBL[rowBeg][i] = value--;
+            m_helixBL[rowBeg][i] = value--;
         rowBeg++; cout << '-';
         for(long i = rowBeg; i <= rowEnd && value; i++)
-            m_helixIBL[i][colEnd] = value--;
+            m_helixBL[i][colEnd] = value--;
         colEnd++; cout << '|';
         for(long i = colEnd; i <= colBeg && value; i++)
-            m_helixIBL[rowEnd][i] = value--;
+            m_helixBL[rowEnd][i] = value--;
         rowEnd--; cout << '-';
     }
     cout << endl;
 }
 
-void Helix::fillHILT()
+void Helix::fillHLT()
 {
     long rowBeg = 0, colEnd = 0;
     long rowEnd = m_size - 1, colBeg = m_size - 1;
     long value = m_size * m_size;
-    cout << "HILT: ";
+    cout << "LT: ";
     while(value)
     {
         for(long i = colEnd; i <= colBeg && value; i++)
-            m_helixILT[rowEnd][i] = value--;
+            m_helixLT[rowEnd][i] = value--;
         rowEnd--; cout << '-';
         for(long i = rowEnd; i >= rowBeg && value; i--)
-            m_helixILT[i][colBeg] = value--;
+            m_helixLT[i][colBeg] = value--;
         colBeg--; cout << '|';
         for(long i = colBeg; i >= colEnd && value; i--)
-            m_helixILT[rowBeg][i] = value--;
+            m_helixLT[rowBeg][i] = value--;
         rowBeg++; cout << '-';
         for(long i = rowBeg; i <= rowEnd && value; i++)
-            m_helixILT[i][colEnd] = value--;
+            m_helixLT[i][colEnd] = value--;
         colEnd++; cout << '|';
     }
     cout << endl;
 }
 
-void Helix::fillHITR()
+void Helix::fillHTR()
 {
     long rowBeg = 0, colEnd = 0;
     long rowEnd = m_size - 1, colBeg = m_size - 1;
     long value = m_size * m_size;
-    cout << "HITR: ";
+    cout << "TR: ";
     while(value)
     {
         for(long i = rowBeg; i <= rowEnd && value; i++)
-            m_helixITR[i][colEnd] = value--;
+            m_helixTR[i][colEnd] = value--;
         colEnd++; cout << '|';
         for(long i = colEnd; i <= colBeg && value; i++)
-            m_helixITR[rowEnd][i] = value--;
+            m_helixTR[rowEnd][i] = value--;
         rowEnd--; cout << '-';
         for(long i = rowEnd; i >= rowBeg && value; i--)
-            m_helixITR[i][colBeg] = value--;
+            m_helixTR[i][colBeg] = value--;
         colBeg--; cout << '|';
         for(long i = colBeg; i >= colEnd && value; i--)
-            m_helixITR[rowBeg][i] = value--;
+            m_helixTR[rowBeg][i] = value--;
         rowBeg++; cout << '-';
     }
     cout << endl;

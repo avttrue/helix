@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void guiWait(long* value)
+void guiWaitEnter(long* value)
 {
     while (true)
     {
@@ -18,69 +18,70 @@ int main()
     clearScreen();
     long size = 0;
     std::cout << "Enter a non-negative and non-even number (0 - exit): ";
-    guiWait(&size);
+    guiWaitEnter(&size);
 
     if(size == 0) return 0;
     if (size < 0 || size % 2 == 0)
     {
         std::cout << "Error, try more: ";
-        guiWait(&size);
+        guiWaitEnter(&size);
     }
 
     Helix* helix = new Helix(size);
 
     clearScreen();
-    cout << endl << "Matrix: " << size << " x " << size << endl << endl;
+    cout << endl << "Field size: " << size << " x " << size << endl << endl;
 
     long ansver = 0;
 
-    helix->drawHIBL();
+    std::cout << "Phase #1 (BL)." << endl;
+    helix->drawHBL();
     helix->printField();
 
-    std::cout << "Phase #2. 1 - next, else - exit: ";
-    guiWait(&ansver);
+    std::cout << "Phase #2 (LT). 1 - next, else - exit: ";
+    guiWaitEnter(&ansver);
     if (ansver != 1) return 0;
-    helix->drawHILT();
+    helix->drawHLT();
     helix->printField();
 
-    std::cout << "Phase #3. 1 - next, else - exit: ";
-    guiWait(&ansver);
+    std::cout << "Phase #3 (TR). 1 - next, else - exit: ";
+    guiWaitEnter(&ansver);
     if (ansver != 1) return 0;
-    helix->drawHITR();
+    helix->drawHTR();
     helix->printField();
 
-    std::cout << "Phase #4. 1 - next, else - exit: ";
-    guiWait(&ansver);
+    std::cout << "Phase #4 (RB). 1 - next, else - exit: ";
+    guiWaitEnter(&ansver);
     if (ansver != 1) return 0;
-    helix->drawHIRB();
+    helix->drawHRB();
     helix->printField();
 
-    std::cout << "Phase #5. 1 - next, else - exit: ";
-    guiWait(&ansver);
+    std::cout << "Phase #5 (BR). 1 - next, else - exit: ";
+    guiWaitEnter(&ansver);
     if (ansver != 1) return 0;
-    helix->drawHIBR();
+    helix->drawHBR();
     helix->printField();
 
-    std::cout << "Phase #6. 1 - next, else - exit: ";
-    guiWait(&ansver);
+    std::cout << "Phase #6 (RT). 1 - next, else - exit: ";
+    guiWaitEnter(&ansver);
     if (ansver != 1) return 0;
-    helix->drawHIRT();
+    helix->drawHRT();
     helix->printField();
 
-    std::cout << "Phase #7. 1 - next, else - exit: ";
-    guiWait(&ansver);
+    std::cout << "Phase #7 (TL). 1 - next, else - exit: ";
+    guiWaitEnter(&ansver);
     if (ansver != 1) return 0;
-    helix->drawHITL();
+    helix->drawHTL();
     helix->printField();
 
-    std::cout << "Phase #8. 1 - next, else - exit: ";
-    guiWait(&ansver);
+    std::cout << "Phase #8 (LB). 1 - next, else - exit: ";
+    guiWaitEnter(&ansver);
     if (ansver != 1) return 0;
-    helix->drawHILB();
+    helix->drawHLB();
     helix->printField();
 
     cout << "FINISH, enter anything" << endl;
-    guiWait(&ansver);
+    guiWaitEnter(&ansver);
 
     delete helix;
     return 0;
