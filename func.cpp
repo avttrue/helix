@@ -16,8 +16,6 @@ void clearScreen()
 #endif
 }
 
-
-
 bool isPrimitive(long n)
 {
     for (long i = 2; i<sqrt(n); i++)
@@ -25,4 +23,3 @@ bool isPrimitive(long n)
     return true;
 }
 
-#include "func.h"
