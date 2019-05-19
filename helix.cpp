@@ -1,34 +1,34 @@
 #include "helix.h"
-#include "helix.h"
-#include <iostream>
-#include <math.h>
+#include "func.h"
 
+#include <iostream>
 
 using namespace std;
 
 Helix::Helix(long size)
 {
     m_size = size;
+    auto s = static_cast<unsigned long>(size);
 
-    m_helixITL = new long *[size];
-    for (long i = 0; i < size; i++) m_helixITL[i] = new long [size];
-    m_helixIRT = new long *[size];
-    for (long i = 0; i < size; i++) m_helixIRT[i] = new long [size];
-    m_helixIBR = new long *[size];
-    for (long i = 0; i < size; i++) m_helixIBR[i] = new long [size];
-    m_helixILB = new long *[size];
-    for (long i = 0; i < size; i++) m_helixILB[i] = new long [size];
-    m_helixITR = new long *[size];
-    for (long i = 0; i < size; i++) m_helixITR[i] = new long [size];
-    m_helixIRB = new long *[size];
-    for (long i = 0; i < size; i++) m_helixIRB[i] = new long [size];
-    m_helixIBL = new long *[size];
-    for (long i = 0; i < size; i++) m_helixIBL[i] = new long [size];
-    m_helixILT = new long *[size];
-    for (long i = 0; i < size; i++) m_helixILT[i] = new long [size];
+    m_helixITL = new long *[s];
+    for (long i = 0; i < size; i++) m_helixITL[i] = new long [s];
+    m_helixIRT = new long *[s];
+    for (long i = 0; i < size; i++) m_helixIRT[i] = new long [s];
+    m_helixIBR = new long *[s];
+    for (long i = 0; i < size; i++) m_helixIBR[i] = new long [s];
+    m_helixILB = new long *[s];
+    for (long i = 0; i < size; i++) m_helixILB[i] = new long [s];
+    m_helixITR = new long *[s];
+    for (long i = 0; i < size; i++) m_helixITR[i] = new long [s];
+    m_helixIRB = new long *[s];
+    for (long i = 0; i < size; i++) m_helixIRB[i] = new long [s];
+    m_helixIBL = new long *[s];
+    for (long i = 0; i < size; i++) m_helixIBL[i] = new long [s];
+    m_helixILT = new long *[s];
+    for (long i = 0; i < size; i++) m_helixILT[i] = new long [s];
 
-    m_field = new char *[size];
-    for (long i = 0; i < size; i++) m_field[i] = new char [size];
+    m_field = new char *[s];
+    for (long i = 0; i < size; i++) m_field[i] = new char [s];
     clearField();
 
     fillHITL();
@@ -65,7 +65,7 @@ Helix::~Helix()
 
 void Helix::printField()
 {
-    std::system("clear");
+    clearScreen();
     for(int i = 0; i < m_size; i++)
     {
         for(int j = 0; j < m_size; j++)
@@ -94,7 +94,7 @@ void Helix::fillField(long **m)
     {
         for(int j = 0; j < m_size; j++)
         {
-            if (isPrime(m[i][j]))
+            if (isPrimitive(m[i][j]))
                 m_field[i][j] = '#';
         }
     }
@@ -266,18 +266,6 @@ void Helix::fillHILT()
         colEnd++; cout << '|';
     }
     cout << endl;
-}
-
-bool Helix::isPrime(long n)
-{
-    for (long i = 2; i<sqrt(n); i++)
-    {
-        if (n % i == 0)
-        {
-            return false;
-        }
-    }
-    return true;
 }
 
 void Helix::fillHITR()

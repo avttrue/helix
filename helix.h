@@ -55,7 +55,6 @@ private:
     void fillHIBL();
     void fillHILT();
 
-    bool isPrime(long n);
 };
 
 #endif // HELIX_H

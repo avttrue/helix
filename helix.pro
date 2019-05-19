@@ -8,8 +8,10 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        func.cpp \
         helix.cpp \
         main.cpp
 
 HEADERS += \
+    func.h \
     helix.h
