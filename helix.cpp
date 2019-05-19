@@ -83,7 +83,7 @@ void Helix::clearField()
     {
         for(int j = 0; j < m_size; j++)
         {
-            m_field[i][j] = '.';
+            m_field[i][j] = '-';
         }
     }
 }
