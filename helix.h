@@ -1,8 +1,6 @@
 ﻿#ifndef HELIX_H
 #define HELIX_H
 
-#include <vector>
-
 class Helix
 {
 public:
